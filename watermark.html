@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>图片水印工具</title>
+  <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <div class="container">
+    <!-- <h1 class="title">图片水印工具</h1> -->
+    
+    <!-- 左侧控制面板 -->
+    <div class="main-content">
+      <div class="control-panel">
+        <div class="panel-section">
+          <h3>水印设置</h3>
+          <div class="control-group">
+            <label>水印文字：</label>
+            <input type="text" id="watermarkText" placeholder="输入水印文字" value="仅用于面试">
+          </div>
+          <div class="control-group">
+            <label>水印颜色：</label>
+            <input type="color" id="watermarkColor" value="#ff0000">
+          </div>
+          <div class="control-group">
+            <label>透明度：</label>
+            <input type="range" id="watermarkOpacity" min="0" max="100" value="100">
+            <span id="opacityValue">100%</span>
+          </div>
+          <div class="control-group">
+            <label>旋转角度：</label>
+            <input type="range" id="watermarkRotation" min="-180" max="180" value="40">
+            <span id="rotationValue">40°</span>
+          </div>
+          <div class="control-group">
+            <label>字体大小：</label>
+            <input type="range" id="watermarkSize" min="12" max="200" value="24">
+            <span id="sizeValue">24px</span>
+          </div>
+          <div class="control-group">
+            <label>字体样式：</label>
+            <select id="watermarkFont">
+              <option value="serif">宋体</option>
+              <option value="sans-serif">黑体</option>
+              <option value="'Microsoft YaHei'">微软雅黑</option>
+              <option value="'SimSun'">新宋体</option>
+              <option value="'KaiTi'">楷体</option>
+              <option value="'FangSong'">仿宋</option>
+              <option value="Arial">Arial</option>
+              <option value="'Times New Roman'">Times New Roman</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="panel-section">
+          <h3>导出设置</h3>
+          <div class="control-group">
+            <label>导出质量：</label>
+            <select id="exportQuality">
+              <option value="1">最高质量</option>
+              <option value="0.8">高质量</option>
+              <option value="0.6">中等质量</option>
+              <option value="0.4">低质量</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="panel-section">
+          <div class="button-group">
+            <button id="btn" class="primary-btn">一键水印</button>
+            <button id="clear" class="warning-btn">清除水印</button>
+            <button id="download" class="success-btn">导出图片</button>
+          </div>
+        </div>
+      </div>
+
+      <!-- 右侧预览区域 -->
+      <div class="preview-section">
+        <div class="upload-area" id="dropZone">
+          <input id="file" type="file" name="image" accept="image/*" multiple />
+          <div class="upload-content">
+            <svg class="upload-icon" viewBox="0 0 24 24">
+              <path d="M19.35 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.65-4.96zM14 13v4h-4v-4H7l5-5 5 5h-3z"/>
+            </svg>
+            <p class="upload-text">点击或拖拽图片到此处</p>
+            <p class="upload-tip">支持单张或多张图片上传</p>
+          </div>
+        </div>
+
+        <div class="preview-box">
+          <h3>图片预览 <span style="font-size: 14px;">（图片分辨率不同，批量设置水印的字体大小也会不同）</span></h3>
+          <div class="preview-container">
+            <button class="nav-btn prev-btn" id="prevBtn">&lt;</button>
+            <canvas id="pre-image"></canvas>
+            <button class="nav-btn next-btn" id="nextBtn">&gt;</button>
+          </div>
+          <div class="preview-info">
+            <span id="preview-counter">0/0</span>
+          </div>
+        </div>
+
+        <canvas id="waterSet"></canvas>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/FileSaver.js/2.0.5/FileSaver.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+  <script src="./watermark.js"></script>
+</body>
+</html>
